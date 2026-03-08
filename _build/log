@@ -1,0 +1,18 @@
+# dune exec crafting-interpreters
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /Users/kennylee/.cache/dune/db
+# Workspace root: /Users/kennylee/Desktop/Coding/crafting-interpreters
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/kennylee/.opam/default/bin/ocamlc.opt -config > /var/folders/ps/ypyz9mvs6hsclvyqp6j6vcp00000gp/T/dune_9ed2c5_output
+$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I lib/.crafting_interpreters.objs/byte -I lib/.crafting_interpreters.objs/native -cmi-file bin/.main.eobjs/byte/dune__exe__Main.cmi -no-alias-deps -opaque -o bin/.main.eobjs/native/dune__exe__Main.cmx -c -impl bin/main.ml)
+$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -o bin/main.exe lib/crafting_interpreters.cmxa bin/.main.eobjs/native/dune__exe__Main.cmx)

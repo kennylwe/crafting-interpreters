@@ -15,6 +15,8 @@ let f x y =
   z * w
 *)
 
+
+
 (** [Circle of radius], [Square of side], [Rectangle of l w] *)
 type shape = Circle of int | Square of int | Rectangle of int * int
 
@@ -26,6 +28,8 @@ let area (shape : shape) =
     | Square side -> float_of_int(side * side)
     | Rectangle (side1, side2) -> float_of_int(side1 * side2)
 
+
+(*
 type expr =
   | Int of int
   | Add of expr * expr
@@ -40,6 +44,8 @@ let rec simplify y =
   | Mul (x, y) -> simplify x * simplify y
 
 (* simplify (Add (Int 5, Int 6)) *)
+
+*)
 
 type expr =
   | Int of int
@@ -60,10 +66,16 @@ let get_int (e : expr) : int =
   | Int i -> i
   | _ -> failwith "not an int"
 
+let get_bool (e : expr) : bool = 
+  match e with
+  | Bool x -> x
+  | _ -> failwith "not a boolean"
+
 (* TODO: Finish this off *)
 (* TODO: Tasks in book *)
 
-let rec simplify (y : expr) : expr = 
+let rec simplify (y : expr) : expr =
+  (* let simpl_int e = get_int (simplify e) in *)
   match y with
   | Int x -> Int x
   | Bool x -> Bool x
@@ -71,6 +83,34 @@ let rec simplify (y : expr) : expr =
     let x = get_int (simplify x) in
     let y = get_int (simplify y) in
     Int (x + y)
-  (* + simplify y *)
-  (* | Mul (x, y) -> simplify x * simplify y *)
-  (* | If (x, y, z) -> if simplify x then simplify y else simplify z *)
+  | Mul (x, y) -> 
+    let x = get_int (simplify x) in
+    let y = get_int (simplify y) in
+    Int (x * y)
+  | If (x, y, z) ->
+    let x = get_bool (simplify x) in
+    (* [if] is a special form, "normal", doesn't compute unless n *)
+    (* [+] is not a special form, "applicative", immediately applies *)
+    if x then simplify y else simplify z
+  | Lt (x, y) ->
+    Bool (get_int (simplify x) < get_int (simplify y))
+  | Gt (x, y) ->
+    Bool (get_int (simplify x) > get_int (simplify y))
+
+(* utop:
+  [#use "filename.ml";;]
+  Ctrl-D to quit
+*)
+
+let rec string_of_expr (e : expr) : string =
+  match e with
+  | Int i -> string_of_int i
+  | Bool i -> string_of_bool i
+  | Add (x, y) -> string_of_expr x ^ " + " ^ string_of_expr y
+  | Mul (x, y) -> string_of_expr x ^ " * " ^ string_of_expr y
+  | If (x, y, z) -> "if " ^ string_of_expr x ^ " then " ^ string_of_expr y ^ " else " ^ string_of_expr z
+  | Lt (x, y) -> string_of_expr x ^ " < " ^ string_of_expr y
+  | Gt (x, y) -> string_of_expr x ^ " > " ^ string_of_expr y
+
+
+let () = print_endline (string_of_expr x)

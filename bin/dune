@@ -1,0 +1,4 @@
+(executable
+ (public_name crafting-interpreters)
+ (name main)
+ (libraries crafting_interpreters))

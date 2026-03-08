@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/crafting-interpreters/META"
+  "_build/install/default/lib/crafting-interpreters/dune-package"
+  "_build/install/default/lib/crafting-interpreters/opam"
+]
+bin: [
+  "_build/install/default/bin/crafting-interpreters"
+]
