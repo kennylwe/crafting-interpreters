@@ -46,17 +46,18 @@ let rec simplify y =
 (* simplify (Add (Int 5, Int 6)) *)
 
 *)
+type binary_op = Add | Sub | Div | Mul
+
 
 type expr =
   | Int of int
   | Bool of bool
-  | Add of expr * expr
-  | Mul of expr * expr
   | If of expr * expr * expr
   | Lt of expr * expr
   | Gt of expr * expr
+  | Binary of binary_op * expr * expr
 
-let x = Add (Mul (Add (Int 1, Int 2), Int 3), Int 4)
+let x = Binary (Add, Binary (Mul, Binary (Add, Int 1, Int 2), Int 3), Int 4)
 
 (* if 1 + 1 < 2 then 10 + 1 else 2 * 3 *)
 let e = If (Lt (Int 1, Int 2), Add (Int 10, Int 1), Mul (Int 2, Int 3))
@@ -73,6 +74,8 @@ let get_bool (e : expr) : bool =
 
 (* TODO: Finish this off *)
 (* TODO: Tasks in book *)
+
+
 
 let rec simplify (y : expr) : expr =
   (* let simpl_int e = get_int (simplify e) in *)
