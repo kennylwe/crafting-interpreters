@@ -13,23 +13,13 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /Users/kennylee/.opam/default/bin/ocamlc.opt -config > /var/folders/ps/ypyz9mvs6hsclvyqp6j6vcp00000gp/T/dune_e45f19_output
+$ /Users/kennylee/.opam/default/bin/ocamlc.opt -config > /var/folders/ps/ypyz9mvs6hsclvyqp6j6vcp00000gp/T/dune_db6698_output
 $ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlc.opt -short-paths -keep-locs -warn-error +a -w -53 -w -49 -nopervasives -nostdlib -g -bin-annot -bin-annot-occurrences -I lib/.crafting_interpreters.objs/byte -no-alias-deps -opaque -o lib/.crafting_interpreters.objs/byte/crafting_interpreters.cmo -c -impl lib/crafting_interpreters.ml-gen)
+$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamldep.opt -modules -impl lib/parser.ml) > _build/default/lib/.crafting_interpreters.objs/crafting_interpreters__Parser.impl.d
+> File "lib/parser.ml", line 24, characters 10-10:
+> Error: Syntax error
+[2]
 $ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamldep.opt -modules -impl lib/lexer.ml) > _build/default/lib/.crafting_interpreters.objs/crafting_interpreters__Lexer.impl.d
 $ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlc.opt -short-paths -keep-locs -warn-error +a -g -bin-annot -bin-annot-occurrences -I lib/.crafting_interpreters.objs/byte -no-alias-deps -opaque -open Crafting_interpreters -o lib/.crafting_interpreters.objs/byte/crafting_interpreters__Lexer.cmo -c -impl lib/lexer.ml)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlc.opt -short-paths -keep-locs -warn-error +a -g -a -o lib/crafting_interpreters.cma lib/.crafting_interpreters.objs/byte/crafting_interpreters.cmo lib/.crafting_interpreters.objs/byte/crafting_interpreters__Lexer.cmo)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlc.opt -short-paths -keep-locs -warn-error +a -g -bin-annot -bin-annot-occurrences -I test/.test_crafting_interpreters.eobjs/byte -I lib/.crafting_interpreters.objs/byte -no-alias-deps -opaque -o test/.test_crafting_interpreters.eobjs/byte/dune__exe__Test_crafting_interpreters.cmi -c -intf test/test_crafting_interpreters.mli)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlc.opt -short-paths -keep-locs -warn-error +a -g -bin-annot -bin-annot-occurrences -I bin/.main.eobjs/byte -I lib/.crafting_interpreters.objs/byte -no-alias-deps -opaque -o bin/.main.eobjs/byte/dune__exe__Main.cmi -c -intf bin/main.mli)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I lib/.crafting_interpreters.objs/byte -I lib/.crafting_interpreters.objs/native -cmi-file bin/.main.eobjs/byte/dune__exe__Main.cmi -no-alias-deps -opaque -o bin/.main.eobjs/native/dune__exe__Main.cmx -c -impl bin/main.ml)
-> File "bin/main.ml", line 63, characters 31-34:
-> 63 | let e = If (Lt (Int 1, Int 2), Add (Int 10, Int 1), Mul (Int 2, Int 3))
->                                     ^^^
-> Error: This variant expression is expected to have type expr
->        There is no constructor Add within type expr
-[2]
 $ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -w -53 -w -49 -nopervasives -nostdlib -g -I lib/.crafting_interpreters.objs/byte -I lib/.crafting_interpreters.objs/native -cmi-file lib/.crafting_interpreters.objs/byte/crafting_interpreters.cmi -no-alias-deps -opaque -o lib/.crafting_interpreters.objs/native/crafting_interpreters.cmx -c -impl lib/crafting_interpreters.ml-gen)
 $ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -I lib/.crafting_interpreters.objs/byte -I lib/.crafting_interpreters.objs/native -cmi-file lib/.crafting_interpreters.objs/byte/crafting_interpreters__Lexer.cmi -no-alias-deps -opaque -open Crafting_interpreters -o lib/.crafting_interpreters.objs/native/crafting_interpreters__Lexer.cmx -c -impl lib/lexer.ml)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -I test/.test_crafting_interpreters.eobjs/byte -I test/.test_crafting_interpreters.eobjs/native -I lib/.crafting_interpreters.objs/byte -I lib/.crafting_interpreters.objs/native -cmi-file test/.test_crafting_interpreters.eobjs/byte/dune__exe__Test_crafting_interpreters.cmi -no-alias-deps -opaque -o test/.test_crafting_interpreters.eobjs/native/dune__exe__Test_crafting_interpreters.cmx -c -impl test/test_crafting_interpreters.ml)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -a -o lib/crafting_interpreters.cmxa lib/.crafting_interpreters.objs/native/crafting_interpreters.cmx lib/.crafting_interpreters.objs/native/crafting_interpreters__Lexer.cmx)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -shared -linkall -I lib -o lib/crafting_interpreters.cmxs lib/crafting_interpreters.cmxa)
-$ (cd _build/default && /Users/kennylee/.opam/default/bin/ocamlopt.opt -short-paths -keep-locs -warn-error +a -g -o test/test_crafting_interpreters.exe lib/crafting_interpreters.cmxa test/.test_crafting_interpreters.eobjs/native/dune__exe__Test_crafting_interpreters.cmx)

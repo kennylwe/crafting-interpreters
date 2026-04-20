@@ -10,6 +10,8 @@ type lexeme =
   | NUMBER of int
   | STAR
   | PLUS
+  | MINUS
+  | DIVIDE
   | IF
   | THEN
   | ELSE
@@ -52,6 +54,8 @@ let rec lex (e : string) : lexeme list =
   match e.[0] with
   | '*' -> STAR :: lex (String.sub e 1 (String.length e))
   (* TODO: Factor out   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ *)
+  | '-' -> MINUS :: lex (String.sub e 1 (String.length e))
+  | '/' -> DIVIDE :: lex (String.sub e 1 (String.length e))
   | '+' -> PLUS :: lex (String.sub e 1 (String.length e))
   | '(' -> LPAREN :: lex (String.sub e 1 (String.length e))
   | ')' -> RPAREN :: lex (String.sub e 1 (String.length e))

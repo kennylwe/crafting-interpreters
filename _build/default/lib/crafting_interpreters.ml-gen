@@ -2,3 +2,6 @@
 
 (** @canonical Crafting_interpreters.Lexer *)
 module Lexer = Crafting_interpreters__Lexer
+
+(** @canonical Crafting_interpreters.Parser *)
+module Parser = Crafting_interpreters__Parser
