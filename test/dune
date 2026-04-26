@@ -1,3 +1,5 @@
-(test
+(library
  (name test_crafting_interpreters)
+ (inline_tests)
+ (preprocess (pps ppx_jane))
  (libraries crafting_interpreters))
