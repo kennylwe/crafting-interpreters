@@ -39,7 +39,7 @@ let rec sexp_of_lexeme_list (lexemes : lexeme list) : sexp * lexeme list =
 
 (* TODO: parse function should call [sexp_of_lexeme_list], but just
  check that the remaining [lexeme list] is empty and return the [sexp] *)
-let parse = failwith "TODO"
+let parse _ = failwith "TODO"
 
 (* TODO: Try converting sexps to ASTs! *)
 (* TODO: Write a [string_of_sexp], which will need a [string_of_lexeme] *)
