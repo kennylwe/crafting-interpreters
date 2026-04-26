@@ -1,26 +1,23 @@
-(lang dune 3.20)
+(lang dune 3.14)
 
 (name crafting-interpreters)
 
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github kennylwe/crafting-interpreters))
 
-(authors "Author Name <author@example.com>")
+(authors "Kenny Lee <kenjlee09@gmail.com>")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Kenny Lee <kenjlee09@gmail.com>")
 
-(license LICENSE)
-
-(documentation https://url/to/documentation)
 
 (package
  (name crafting-interpreters)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Learning how to craft interpreters")
+ (description "Hello World")
  (depends ocaml)
  (tags
-  ("add topics" "to describe" your project)))
+  ("interpreters" "coding" )))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
