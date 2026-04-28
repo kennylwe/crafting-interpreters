@@ -36,29 +36,29 @@ let is_alpha (c : char) : bool =
 let is_numeric (c : char) : bool = 
   Char.code c >= Char.code '0' && Char.code c <= Char.code '9'
 
-let tail (s: string) : string = String.sub s 1 (String.length s)
+let tail (s: string) : string = String.sub s 1 (String.length s - 1)
 
 (* "then else 12 32" -> ("then", "else 12 32") *)
 
-
 let rec read_while (pred: char -> bool) (s : string) : string * string =
+  if s = "" then "", s else
   if pred s.[0] then
     let (left, right) = read_while (pred)(tail s) in
     (String.of_seq (Seq.cons s.[0] (String.to_seq left)), right) else
       ("", s)
 
 let read_until_non_alpha = read_while is_alpha
-let read_until_non_numeric = read_while is_alpha
+let read_until_non_numeric = read_while is_numeric
 
 let rec lex (e : string) : lexeme list =
+  if e = "" then [] else
   match e.[0] with
-  | '*' -> STAR :: lex (String.sub e 1 (String.length e))
-  (* TODO: Factor out   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ *)
-  | '-' -> MINUS :: lex (String.sub e 1 (String.length e))
-  | '/' -> DIVIDE :: lex (String.sub e 1 (String.length e))
-  | '+' -> PLUS :: lex (String.sub e 1 (String.length e))
-  | '(' -> LPAREN :: lex (String.sub e 1 (String.length e))
-  | ')' -> RPAREN :: lex (String.sub e 1 (String.length e))
+  | '*' -> STAR :: lex (tail e)
+  | '-' -> MINUS :: lex (tail e)
+  | '/' -> DIVIDE :: lex (tail e)
+  | '+' -> PLUS :: lex (tail e)
+  | '(' -> LPAREN :: lex (tail e)
+  | ')' -> RPAREN :: lex (tail e)
   
   (* TODO: Do the rest of them: *)
   | c when is_alpha c ->
@@ -77,4 +77,5 @@ let rec lex (e : string) : lexeme list =
   | c when is_numeric c ->
       let left, right = read_until_non_numeric e in
       NUMBER (int_of_string left) :: lex right
+  | ' ' -> lex (tail e)
   | _ -> failwith "Unexpected token"
