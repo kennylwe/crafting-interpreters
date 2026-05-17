@@ -1,17 +1,4 @@
-type lexeme =
-  | ID of string
-  | NUMBER of int
-  | STAR
-  | PLUS
-  | IF
-  | THEN
-  | ELSE
-  | LT
-  | GT
-  | TRUE
-  | FALSE
-  | LPAREN
-  | RPAREN
+open Lexer
 
 type sexp = Atom of lexeme | List of sexp list
 
@@ -39,7 +26,44 @@ let rec sexp_of_lexeme_list (lexemes : lexeme list) : sexp * lexeme list =
 
 (* TODO: parse function should call [sexp_of_lexeme_list], but just
  check that the remaining [lexeme list] is empty and return the [sexp] *)
-let parse _ = failwith "TODO"
+let parse (lexemes : lexeme list) : sexp = 
+  let (sexpres, lexlist) = sexp_of_lexeme_list lexemes in
+  if (lexlist <> []) then failwith "you added something bad loser" else sexpres
+
+type binary_op = Add | Sub | Div | Mul | Lt | Gt
+
+
+type expr =
+  | Int of int
+  | Bool of bool
+  | If of expr * expr * expr
+  | Binary of binary_op * expr * expr
+
+
+
+let rec expr_of_sexp (s : sexp) : expr = 
+  match s with
+  | Atom (NUMBER i) -> Int i
+  | Atom TRUE -> Bool true
+  | Atom FALSE -> Bool false
+  | List [Atom op; s1; s2] -> 
+      let binary_op = 
+        match op with 
+        | STAR -> Mul
+        | PLUS -> Add
+        | MINUS -> Sub
+        | DIVIDE -> Div
+        | LT -> Lt
+        | GT -> Gt
+        | _ -> failwith "Invalid Operator"
+      in
+      Binary (binary_op, expr_of_sexp s1, expr_of_sexp s2)
+
+  | List [Atom IF; s1; s2; s3] -> If (expr_of_sexp s1, expr_of_sexp s2, expr_of_sexp s3) 
+  | _ -> failwith "Invalid expression"
+
+  
+
 
 (* TODO: Try converting sexps to ASTs! *)
 (* TODO: Write a [string_of_sexp], which will need a [string_of_lexeme] *)

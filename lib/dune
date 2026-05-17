@@ -1,2 +1,6 @@
 (library
- (name crafting_interpreters))
+ (name crafting_interpreters)
+ (modules
+   lexer
+   parser
+   ))
